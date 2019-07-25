@@ -117,4 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="BackspaceButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAAAnCAYAAAC/mE48AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAOASURBVGhD
+        5ZjZTxpRFMb951rS2hhBYahdHtqHpmnS+FCNG7ihjNho27RUwQ2tNTYqClqtsYlVETXtn6BNI4vbQzWi
+        PnnK5d4RZjgCVpCbzJf84nDumbn3+5wNCqIClYMW1QRaVBNoUU2gRTWBFtUEWswJGtMXuFU3mjM05gl0
+        3jSgxaxSLHrhJhQI7aHzpwEtZg1tmxdWV5bYEnOrnZ19dA1pQItZQSd6ksxvbv1mW9nR38NDtgUQDnMU
+        AGb+UfMQaBq9cDuLPGn4wI7OUQAx875ltiyqB01DaO91MVS8ZjNwEgAx719dYUuiUprXl9ugqCnzO3bZ
+        q3a40zKLjgmVHAWAmS9LMK9pmgbt06pYPRAMgVaclu2P0eXojfUv+n+CpsGdNM5NAJh5Y6P8P6+zjLMR
+        qj/bgZQhSOYlPRNHknq4CKBEnII1v48tg8rYOIj31tghcnzMui4PocvZxzqoukenobDla1Jf3gMojZrf
+        WF9lS6ASLjEvIZi6IRKJsG6A7UAQtNZ4CF3OfjZCZR/xyvZPJK8BoOYbUpuXICGcnJywvaL3hEAI7ts8
+        8M7uYBWqjynME/IWALnmNzbW2NRUhvrMzEvoa7vhOOFyUMr+ObV5Ql4CMJoc4PPFr/nz83MoMV/NvERp
+        rQNCoSA7Ulydg5Nov5K8BPDyxUM2JdXy+i+0L1OGP42wI1GdnZ2B0LmA9irJ2yVQYX3DpqUan11E+9Lh
+        7B1gR5BrO/qeUNzqQfdJJK83wbp2eQgTc1cLoUdhfmxmAQ7299kngGBoB4qtnN4EJZQhuDMMQWne1kPf
+        8gxmJxwdHbEqC6GV08egRK3tLVsClfvbD7RPoqfPxTqpRKf8FVdQhBAK7156OXARAKGmTXEmzCeHcK/Z
+        A7pSgXVQKc1LGExOOEz4rr93cACFJk5fhSWqxdQh6CxuNkIlOnDzEnpFCI8tyY9argIgVCvOhKn5Jdm4
+        0DwGW5ub0NGf/g5PIGdCOByG57ZhdJy7AAhVYidbEtVkNIS7lpmL8ZK2OVl/OgztyV+CJLgMgKAMYeb7
+        ChRZ8R81roOxKn4D5ioAgjKE+SU/6M0D0UddfxTy93oI9S6wvo//ZsBdAIRKawdbXu7FZQCEcsvNhBAM
+        7qLzpwEtZp1elyv2Jef09PQC8lkisf4/Y2SbCJs7DWhRTaBFNYEW1QRaVBNoUSUUwD+UJE1BLWxBpgAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="KeyPadAnimation.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
