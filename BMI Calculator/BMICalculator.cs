@@ -15,7 +15,13 @@ namespace BMI_Calculator
         //Properties
         public string outputString { get; set; }
         public bool decimalExists { get; set; }
+        public int KeyPadOriginYLocation {get; set;}
         public TextBox ActiveTextBox { get; set; }
+
+        public Animation animationState;
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -30,6 +36,8 @@ namespace BMI_Calculator
             
             Size = new Size(320, 480);
             ActiveTextBox = null; //instantiates the starting active textBox
+            animationState = Animation.IDLE;
+            KeyPadOriginYLocation = KeyPadTable.Location.Y;
         }
 
         /// <summary>
@@ -88,8 +96,16 @@ namespace BMI_Calculator
             {
                 int decimalPosition = Array.IndexOf(BMIArray, '.');
                 int maximumLength = decimalPosition + 3;
-                BMIString = BMIString.Remove(maximumLength);
-                ResultTextBox.Text = BMIString;
+                try
+                {
+                    BMIString = BMIString.Remove(maximumLength);
+                    ResultTextBox.Text = BMIString;
+                }
+                catch
+                {
+                    MessageBox.Show("Error: The weight you have entered is too much for a person");
+                }
+                
             }
             else
             {
@@ -165,7 +181,9 @@ namespace BMI_Calculator
                         backSpace();
                         break;
                     case "done":
-                        
+                        KeyPadAnimationTimer.Enabled = true;
+                        animationState = Animation.DOWN;
+                        ActiveTextBox.BackColor = Color.White;
                         break;
                     case "clear":
                         ClearKeyPad();
@@ -226,6 +244,8 @@ namespace BMI_Calculator
 
             KeyPadTable.BringToFront();
             KeyPadAnimationTimer.Enabled = true;
+            KeyPadTable.Visible = true;
+            animationState = Animation.UP;
         }
 
         /// <summary>
@@ -235,15 +255,49 @@ namespace BMI_Calculator
         /// <param name="e"></param>
         private void KeyPadAnimationTimer_Tick(object sender, EventArgs e)
         {
+            switch (animationState)
+            {
+                case (Animation.IDLE):
+                    break;
+                case (Animation.UP):
+                    MoveKeyPadUp();
+                    break;
+                case (Animation.DOWN):
+                    MoveKeyPadDown();
+                    break;
+               
+            }
+           
+        }
+
+        private void MoveKeyPadUp()
+        {
             var currentLocation = KeyPadTable.Location;
 
             currentLocation = new Point(currentLocation.X, currentLocation.Y - 30);
             KeyPadTable.Location = currentLocation;
 
-            if (currentLocation.Y<= ActiveTextBox.Location.Y + 55)
+            if (currentLocation.Y <= ActiveTextBox.Location.Y + 55)
             {
                 KeyPadTable.Location = new Point(currentLocation.X, ActiveTextBox.Location.Y + 55);
                 KeyPadAnimationTimer.Enabled = false;
+                animationState = Animation.IDLE;
+            }
+        }
+
+        private void MoveKeyPadDown()
+        {
+            var currentLocation = KeyPadTable.Location;
+
+            currentLocation = new Point(currentLocation.X, currentLocation.Y + 30);
+            KeyPadTable.Location = currentLocation;
+
+            if (currentLocation.Y >= KeyPadOriginYLocation)
+            {
+                KeyPadTable.Location = new Point(currentLocation.X, KeyPadOriginYLocation);
+                KeyPadAnimationTimer.Enabled = false;
+                animationState = Animation.IDLE;
+                KeyPadTable.Visible = false;
             }
         }
     }
