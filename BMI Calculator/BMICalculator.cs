@@ -100,10 +100,7 @@ namespace BMI_Calculator
        
         
 
-        private void KeyPadAnimation_Tick(object sender, EventArgs e)
-        {
-            
-        }
+       
 
         
         /// <summary>
@@ -165,17 +162,7 @@ namespace BMI_Calculator
                 switch (tag)
                 {
                     case "back":
-                        var lastCharacter = outputString.Substring(outputString.Length-1);
-                        if (lastCharacter == ".")
-                        {
-                            decimalExists = false;
-                        }
-                        outputString=outputString.Remove(outputString.Length - 1);                       
-                        if (outputString.Length == 0)
-                        {
-                            outputString = "0";
-                        }
-                        ActiveTextBox.Text = outputString;
+                        backSpace();
                         break;
                     case "done":
                         
@@ -194,6 +181,22 @@ namespace BMI_Calculator
                 }
             }
         }
+
+        private void backSpace()
+        {
+            var lastCharacter = outputString.Substring(outputString.Length - 1);
+            if (lastCharacter == ".")
+            {
+                decimalExists = false;
+            }
+            outputString = outputString.Remove(outputString.Length - 1);
+            if (outputString.Length == 0)
+            {
+                outputString = "0";
+            }
+            ActiveTextBox.Text = outputString;
+        }
+
         /// <summary>
         /// This Method clears the entered number using the keypad
         /// </summary>
@@ -221,8 +224,27 @@ namespace BMI_Calculator
             ActiveTextBox.BackColor = Color.Yellow;
             outputString= SenderTextBox.Text;
 
-            KeyPadTable.Location = new Point(6, ActiveTextBox.Location.Y+55);
             KeyPadTable.BringToFront();
+            KeyPadAnimationTimer.Enabled = true;
+        }
+
+        /// <summary>
+        /// Event Handler for KeyPadAnimation tick event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void KeyPadAnimationTimer_Tick(object sender, EventArgs e)
+        {
+            var currentLocation = KeyPadTable.Location;
+
+            currentLocation = new Point(currentLocation.X, currentLocation.Y - 30);
+            KeyPadTable.Location = currentLocation;
+
+            if (currentLocation.Y<= ActiveTextBox.Location.Y + 55)
+            {
+                KeyPadTable.Location = new Point(currentLocation.X, ActiveTextBox.Location.Y + 55);
+                KeyPadAnimationTimer.Enabled = false;
+            }
         }
     }
 }

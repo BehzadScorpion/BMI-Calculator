@@ -58,7 +58,7 @@
             this.OneButton = new System.Windows.Forms.Button();
             this.ZeroButton = new System.Windows.Forms.Button();
             this.BackspaceButton = new System.Windows.Forms.Button();
-            this.KeyPadAnimation = new System.Windows.Forms.Timer(this.components);
+            this.KeyPadAnimationTimer = new System.Windows.Forms.Timer(this.components);
             this.NumbersTable.SuspendLayout();
             this.RadioTable.SuspendLayout();
             this.ResultTable.SuspendLayout();
@@ -485,10 +485,10 @@
             this.BackspaceButton.UseVisualStyleBackColor = true;
             this.BackspaceButton.Click += new System.EventHandler(this.KeyPadButton_Click);
             // 
-            // KeyPadAnimation
+            // KeyPadAnimationTimer
             // 
-            this.KeyPadAnimation.Interval = 16;
-            this.KeyPadAnimation.Tick += new System.EventHandler(this.KeyPadAnimation_Tick);
+            this.KeyPadAnimationTimer.Interval = 16;
+            this.KeyPadAnimationTimer.Tick += new System.EventHandler(this.KeyPadAnimationTimer_Tick);
             // 
             // MainForm
             // 
@@ -548,7 +548,7 @@
         private System.Windows.Forms.Button DecimalButton;
         private System.Windows.Forms.Button DoneButton;
         private System.Windows.Forms.Button ClearButton;
-        private System.Windows.Forms.Timer KeyPadAnimation;
+        private System.Windows.Forms.Timer KeyPadAnimationTimer;
     }
 }
 
