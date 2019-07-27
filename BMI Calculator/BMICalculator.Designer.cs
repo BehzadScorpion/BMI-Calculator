@@ -59,6 +59,8 @@
             this.ZeroButton = new System.Windows.Forms.Button();
             this.BackspaceButton = new System.Windows.Forms.Button();
             this.KeyPadAnimationTimer = new System.Windows.Forms.Timer(this.components);
+            this.ResultMessageLabel = new System.Windows.Forms.Label();
+            this.BMIResultTimer = new System.Windows.Forms.Timer(this.components);
             this.NumbersTable.SuspendLayout();
             this.RadioTable.SuspendLayout();
             this.ResultTable.SuspendLayout();
@@ -79,7 +81,7 @@
             this.NumbersTable.Controls.Add(this.HeightUnitLabel, 2, 1);
             this.NumbersTable.Controls.Add(this.WeightLabel, 0, 0);
             this.NumbersTable.Controls.Add(this.HeightTextBox, 1, 1);
-            this.NumbersTable.Location = new System.Drawing.Point(-4, 1);
+            this.NumbersTable.Location = new System.Drawing.Point(-3, 1);
             this.NumbersTable.Name = "NumbersTable";
             this.NumbersTable.RowCount = 2;
             this.NumbersTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -183,7 +185,7 @@
             this.RadioTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.RadioTable.Controls.Add(this.ImperialRadioButton, 0, 1);
             this.RadioTable.Controls.Add(this.MetricRadioButton, 0, 0);
-            this.RadioTable.Location = new System.Drawing.Point(-4, 114);
+            this.RadioTable.Location = new System.Drawing.Point(-3, 114);
             this.RadioTable.Name = "RadioTable";
             this.RadioTable.RowCount = 2;
             this.RadioTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -245,7 +247,7 @@
             this.ResultTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.ResultTable.Controls.Add(this.ResultTextBox, 0, 1);
             this.ResultTable.Controls.Add(this.CalculateBMIButton, 0, 0);
-            this.ResultTable.Location = new System.Drawing.Point(3, 226);
+            this.ResultTable.Location = new System.Drawing.Point(4, 226);
             this.ResultTable.Name = "ResultTable";
             this.ResultTable.RowCount = 2;
             this.ResultTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -490,10 +492,27 @@
             this.KeyPadAnimationTimer.Interval = 16;
             this.KeyPadAnimationTimer.Tick += new System.EventHandler(this.KeyPadAnimationTimer_Tick);
             // 
+            // ResultMessageLabel
+            // 
+            this.ResultMessageLabel.AutoSize = true;
+            this.ResultMessageLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.ResultMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResultMessageLabel.Location = new System.Drawing.Point(77, 208);
+            this.ResultMessageLabel.Name = "ResultMessageLabel";
+            this.ResultMessageLabel.Size = new System.Drawing.Size(0, 20);
+            this.ResultMessageLabel.TabIndex = 5;
+            this.ResultMessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BMIResultTimer
+            // 
+            this.BMIResultTimer.Interval = 3000;
+            this.BMIResultTimer.Tick += new System.EventHandler(this.BMIResultTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(302, 753);
+            this.ClientSize = new System.Drawing.Size(304, 753);
+            this.Controls.Add(this.ResultMessageLabel);
             this.Controls.Add(this.KeyPadTable);
             this.Controls.Add(this.ResultTable);
             this.Controls.Add(this.RadioTable);
@@ -549,6 +568,8 @@
         private System.Windows.Forms.Button DoneButton;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Timer KeyPadAnimationTimer;
+        private System.Windows.Forms.Label ResultMessageLabel;
+        private System.Windows.Forms.Timer BMIResultTimer;
     }
 }
 

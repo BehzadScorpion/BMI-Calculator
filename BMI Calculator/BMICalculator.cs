@@ -16,6 +16,7 @@ namespace BMI_Calculator
         public string outputString { get; set; }
         public bool decimalExists { get; set; }
         public int KeyPadOriginYLocation {get; set;}
+        public double EnteredValue { get; set; }
         public TextBox ActiveTextBox { get; set; }
 
         public Animation animationState;
@@ -38,6 +39,7 @@ namespace BMI_Calculator
             ActiveTextBox = null; //instantiates the starting active textBox
             animationState = Animation.IDLE;
             KeyPadOriginYLocation = KeyPadTable.Location.Y;
+            ResultMessageLabel.Hide();
         }
 
         /// <summary>
@@ -82,7 +84,40 @@ namespace BMI_Calculator
                 BMI = (weight * 703) / (height * height);
             }
 
+            DisplayBMIResultMessage(BMI);
+
             return BMI;
+        }
+
+        /// <summary>
+        /// Enters the result message into the appropriate label 
+        /// </summary>
+        /// <param name="BMI"></param>
+        private void DisplayBMIResultMessage(double BMI)
+        {
+            BMIResultTimer.Enabled = true;
+            ResultMessageLabel.Show();
+            if (BMI < 18.5)
+            {
+                ResultMessageLabel.Text = "You are Underweight";
+            }
+            else if (18.5 <= BMI & BMI <= 24.9)
+            {
+                ResultMessageLabel.Text = "You have a Normal weight";
+            }
+            else if (25 <= BMI & BMI <= 29.9)
+            {
+                ResultMessageLabel.Text = "You are Overweight";
+            }
+            else
+            {
+                ResultMessageLabel.Text = "You are Obese";
+            }
+        }
+        private void BMIResultTimer_Tick(object sender, EventArgs e)
+        {
+            BMIResultTimer.Enabled = false;
+            ResultMessageLabel.Hide();
         }
         /// <summary>
         /// This method rounds up the BMI to two decimals  (ROUNDING UP MISSING FOR THE CASE OF X>5)
@@ -94,17 +129,20 @@ namespace BMI_Calculator
             char[] BMIArray = BMIString.ToCharArray();
             if (BMIArray.Contains('.'))
             {
-                int decimalPosition = Array.IndexOf(BMIArray, '.');
-                int maximumLength = decimalPosition + 3;
-                try
-                {
-                    BMIString = BMIString.Remove(maximumLength);
+                int decimalPosition = BMIString.IndexOf('.');
+                int maximumLength = decimalPosition + 2;
+                
+                    if (BMIArray[maximumLength] >= 5)
+                    {
+                        BMI = Convert.ToDouble(BMIString) + 0.1;
+                        BMIString = Convert.ToString(BMI);
+                        BMIString = BMIString.Remove(maximumLength);
+                    }
+               
+                
+                    
                     ResultTextBox.Text = BMIString;
-                }
-                catch
-                {
-                    MessageBox.Show("Error: The weight you have entered is too much for a person");
-                }
+                
                 
             }
             else
@@ -155,13 +193,18 @@ namespace BMI_Calculator
 
             if (numericResult)
             {
+                int maxSize = (decimalExists)? 5:3;
                 if (outputString == "0")
                 {
                     outputString = tag;
                 }
                 else
                 {
-                    outputString += tag;                   
+                    if (outputString.Length < maxSize)
+                    {
+                        outputString += tag;
+                    }
+                                      
                 }
 
                 try//exception handled- whilst the animation was not inserted, clicking the KeyPad buttons would initiate a null-refrence error
@@ -181,6 +224,17 @@ namespace BMI_Calculator
                         backSpace();
                         break;
                     case "done":
+                        if (outputString.IndexOf('.') > -1)
+                        {
+                            outputString = outputString.Remove(outputString.IndexOf('.') + 2);
+                        }
+                        
+                        EnteredValue = Convert.ToDouble(ActiveTextBox.Text);
+                        if (EnteredValue < 0.1)
+                        {
+                            outputString = "0.1";
+                        }
+                        ActiveTextBox.Text = outputString;
                         KeyPadAnimationTimer.Enabled = true;
                         animationState = Animation.DOWN;
                         ActiveTextBox.BackColor = Color.White;
@@ -233,10 +287,11 @@ namespace BMI_Calculator
 
         private void ActiveTextBox_Click(object sender, EventArgs e)
         {
-            if (ActiveTextBox != null)
-            {
-                ActiveTextBox.BackColor = Color.White;
-            }
+            //if (ActiveTextBox != null)
+            //{
+            //    ActiveTextBox.BackColor = Color.White;
+               
+            //}
             var SenderTextBox = sender as TextBox;
             ActiveTextBox = SenderTextBox;
             ActiveTextBox.BackColor = Color.Yellow;
@@ -300,5 +355,7 @@ namespace BMI_Calculator
                 KeyPadTable.Visible = false;
             }
         }
+
+       
     }
 }
